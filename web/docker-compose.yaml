@@ -7,7 +7,6 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
     networks:
       - mynetwork
-        ipv4_address: 172.22.0.4
     ports:
      - "80:80"
      - "443:443"
