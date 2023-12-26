@@ -5,7 +5,7 @@ services:
     # image: "ghcr.io/home-assistant/home-assistant:stable"
     image: "homeassistant/home-assistant:stable"
     volumes:
-      - ./volumes/var/ha/config:/config
+      - ./volume/ha/config:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     restart: unless-stopped
@@ -18,7 +18,7 @@ services:
     container_name: mosquitto
     image: eclipse-mosquitto
     volumes:
-      - ./volumes/opt/mosquitto:/mosquitto
+      - ./volume/mosquitto:/mosquitto
     networks:
       - mynetwork
     ports:
