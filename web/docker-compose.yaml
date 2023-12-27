@@ -5,6 +5,7 @@ services:
     volumes:
       # - ./templates:/etc/nginx/templates
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
     networks:
       - mynetwork
     ports:
