@@ -1,0 +1,6 @@
+# 每天凌晨 00:01
+#1 0 * * * /bin/bash /schedule/daily.sh
+# 每個整點
+#0 * * * * /bin/bash /schedule/hourly.sh
+# 每間隔10分鐘
+*/10 * * * * /bin/bash /schedule/ddns.sh
