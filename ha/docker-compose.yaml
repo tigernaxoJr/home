@@ -2,8 +2,8 @@ version: '3'
 services:
   ha:
     container_name: homeassistant
-    # image: "ghcr.io/home-assistant/home-assistant:stable"
-    image: "homeassistant/home-assistant:stable"
+    #image: "homeassistant/home-assistant:stable"
+    image: ${HA_IMAGE}
     volumes:
       - ./volume/ha/config:/config
       - /etc/localtime:/etc/localtime:ro
@@ -14,16 +14,16 @@ services:
       - mynetwork
     ports:
       - 8123:8123  # HA 控台的 port
-  mosquitto:
-    container_name: mosquitto
-    image: eclipse-mosquitto
-    volumes:
-      - ./volume/mosquitto:/mosquitto
-    networks:
-      - mynetwork
-    ports:
-      - 1883:1883
-      - 9001:9001
+#  mosquitto:
+#    container_name: mosquitto
+#    image: eclipse-mosquitto
+#    volumes:
+#      - ./volume/mosquitto:/mosquitto
+#    networks:
+#      - mynetwork
+#    ports:
+#      - 1883:1883
+#      - 9001:9001
   # 如果要把 zigbee2mqtt 整合在同一台機器上...
 #  zigbee2mqtt:
 #    container_name: zigbee2mqtt

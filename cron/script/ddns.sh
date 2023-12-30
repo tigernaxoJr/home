@@ -4,9 +4,9 @@ get_public_ip(){
   echo $(curl -s ${url} | jq -r .ip)
 }
 get_zone_id(){
-  local url="https://api.cloudflare.com/client/v4/zones?name=tigernaxo.com"
+  local url="https://api.cloudflare.com/client/v4/zones?name=${zone}"
   local result=$(curl ${url}  --header "Authorization: Bearer ${token}")
-  echo "$result" | jq -r '.result[] | select(.name == "tigernaxo.com") | .id'
+  echo $result | jq -r  '.result[] | select(.name == "'$zone'") | .id' 
 }
 ddns_update(){
   # 取得 zone_id
@@ -21,8 +21,8 @@ ddns_update(){
     --data '{ "type": "A" }')
 
   # 使用 jq 從 A Record 提取 dns_records, old_ip(cloudflare 當前設置的 ip)
-  local old_ip=$(echo "$result" | jq -r '.result[] | select(.name == "home.tigernaxo.com") | .content')
-  local dns_records=$(echo "$result" | jq -r '.result[] | select(.name == "home.tigernaxo.com") | .id')
+  local old_ip=$(echo "$result" | jq -r '.result[] | select(.name == "'${name}.${zone}'") | .content')
+  local dns_records=$(echo "$result" | jq -r '.result[] | select(.name == "'${name}.${zone}'") | .id')
   local current_ip=$(get_public_ip)
 
   echo "old_ip:$old_ip"
