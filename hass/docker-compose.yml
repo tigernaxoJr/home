@@ -1,19 +1,20 @@
-version: '3'
+version: '3.8'
 services:
-  ha:
+  hass:
     container_name: homeassistant
+    #image: "homeassistant/home-assistant:stable"
     #image: "homeassistant/home-assistant:stable"
     image: ${HA_IMAGE}
     volumes:
-      - ./volume/ha/config:/config
+      - ./config:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     restart: unless-stopped
     privileged: true
     networks:
       - mynetwork
-    ports:
-      - 8123:8123  # HA 控台的 port
+    #ports:
+      #- 8123:8123  # HA 控台的 port
 #  mosquitto:
 #    container_name: mosquitto
 #    image: eclipse-mosquitto
@@ -39,6 +40,7 @@ services:
 #      - /dev/ttyUSB0:/dev/ttyUSB0
 #    restart: always
 #    privileged: true
+
 networks:
   mynetwork:
     external: true

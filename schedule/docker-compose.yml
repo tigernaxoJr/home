@@ -1,0 +1,17 @@
+version: '3'
+services:
+  schedule:
+    # When you run the docker stack deploy from the compose file. You need to mention the image name as well when building it from Dockerfile.
+    # https://stackoverflow.com/questions/61097164/docker-stack-deploy-error-response-from-daemon-rpc-error-code-invalidargume
+    image: schedule
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - mynetwork
+    env_file:
+      - secret.env
+
+networks:
+  mynetwork:
+    external: true
